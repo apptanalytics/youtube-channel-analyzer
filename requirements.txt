@@ -1,0 +1,2 @@
+google-api-python-client>=2.0.0
+apify>=3.0.0

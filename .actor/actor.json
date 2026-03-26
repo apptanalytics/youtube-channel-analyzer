@@ -1,0 +1,14 @@
+{
+    "actorSpecification": 1,
+    "name": "youtube-channel-analyzer",
+    "title": "YouTube Channel Analyzer",
+    "description": "Get complete video catalog analytics for any YouTube channel in seconds. Full engagement metrics, performance rankings, and channel stats for content research and competitor analysis.",
+    "version": "1.0",
+    "dockerfile": "../Dockerfile",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "categories": ["Videos", "Data extraction", "Analytics"],
+    "pricingHint": "$0.05 per scan",
+    "minMemoryMbytes": 256,
+    "maxMemoryMbytes": 512
+}

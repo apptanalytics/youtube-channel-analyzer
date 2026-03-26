@@ -1,0 +1,13 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "YouTube Channel Analyzer Output",
+    "description": "Channel analysis results",
+    "properties": {
+        "channelSummary": {
+            "type": "string",
+            "title": "Channel Summary",
+            "description": "Summary of channel analysis",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        }
+    }
+}

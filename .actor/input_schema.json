@@ -1,0 +1,30 @@
+{
+    "title": "YouTube Channel Analyzer Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "channelId": {
+            "title": "Channel ID or Handle",
+            "type": "string",
+            "description": "YouTube channel ID (e.g., UC-3IZKseVpdzPSBaWxBxundA) or handle (e.g., @MrBeast)",
+            "editor": "textfield"
+        },
+        "includeChannelStats": {
+            "title": "Include Channel Stats",
+            "type": "boolean",
+            "description": "Include overall channel statistics (subscriber count, total views, video count)",
+            "editor": "checkbox",
+            "default": true
+        },
+        "maxVideos": {
+            "title": "Max Videos",
+            "type": "integer",
+            "description": "Maximum number of videos to fetch (most recent first)",
+            "editor": "number",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 5000
+        }
+    },
+    "required": ["channelId"]
+}
