@@ -75,7 +75,7 @@ async def main():
                 channels_response = await asyncio.get_running_loop().run_in_executor(
                     None,
                     lambda: youtube.channels().list(
-                        part='snippet,contentDetails,statistics',
+                        part='snippet,contentDetails,statistics,topicDetails',
                         forHandle=handle
                     ).execute()
                 )
@@ -83,7 +83,7 @@ async def main():
                 channels_response = await asyncio.get_running_loop().run_in_executor(
                     None,
                     lambda: youtube.channels().list(
-                        part='snippet,contentDetails,statistics',
+                        part='snippet,contentDetails,statistics,topicDetails',
                         id=channel_input
                     ).execute()
                 )
@@ -92,7 +92,7 @@ async def main():
                 channels_response = await asyncio.get_running_loop().run_in_executor(
                     None,
                     lambda: youtube.channels().list(
-                        part='snippet,contentDetails,statistics',
+                        part='snippet,contentDetails,statistics,topicDetails',
                         forHandle=channel_input.lstrip('@')
                     ).execute()
                 )
@@ -108,6 +108,7 @@ async def main():
             snippet = channel.get('snippet', {})
             stats = channel.get('statistics', {})
             content_details = channel.get('contentDetails', {})
+            topic_details = channel.get('topicDetails', {})
             uploads_playlist_id = content_details.get('relatedPlaylists', {}).get('uploads')
 
             if not uploads_playlist_id:
@@ -127,6 +128,7 @@ async def main():
                 'subscriberCount': int(stats.get('subscriberCount', 0) or 0),
                 'videoCount': int(stats.get('videoCount', 0) or 0),
                 'viewCount': int(stats.get('viewCount', 0) or 0),
+                'topicCategories': topic_details.get('topicCategories', []),
             }
 
             # Step 2: Get all videos from uploads playlist
