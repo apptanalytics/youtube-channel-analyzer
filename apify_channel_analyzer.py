@@ -45,6 +45,42 @@ def format_duration(seconds):
     return f"{m:02d}:{s:02d}"
 
 
+YOUTUBE_VIDEO_CATEGORIES = {
+    "1": "Film & Animation",
+    "2": "Autos & Vehicles",
+    "10": "Music",
+    "15": "Pets & Animals",
+    "17": "Sports",
+    "18": "Short Movies",
+    "19": "Travel & Events",
+    "20": "Gaming",
+    "21": "Videoblogging",
+    "22": "People & Blogs",
+    "23": "Comedy",
+    "24": "Entertainment",
+    "25": "News & Politics",
+    "26": "Howto & Style",
+    "27": "Education",
+    "28": "Science & Technology",
+    "29": "Nonprofits & Activism",
+    "30": "Movies",
+    "31": "Anime/Animation",
+    "32": "Action/Adventure",
+    "33": "Classics",
+    "34": "Comedy",
+    "35": "Documentary",
+    "36": "Drama",
+    "37": "Family",
+    "38": "Foreign",
+    "39": "Horror",
+    "40": "Sci-Fi/Fantasy",
+    "41": "Thriller",
+    "42": "Shorts",
+    "43": "Shows",
+    "44": "Trailers",
+}
+
+
 async def main():
     async with Actor:
         actor_input = await Actor.get_input() or {}
@@ -162,7 +198,7 @@ async def main():
                     video_stats_response = await asyncio.get_running_loop().run_in_executor(
                         None,
                         lambda: youtube.videos().list(
-                            part='statistics,contentDetails',
+                            part='snippet,statistics,contentDetails',
                             id=','.join(video_ids)
                         ).execute()
                     )
@@ -171,6 +207,7 @@ async def main():
                     for v in video_stats_response.get('items', []):
                         vid = v['id']
                         stats_map[vid] = {
+                            'snippet': v.get('snippet', {}),
                             'statistics': v.get('statistics', {}),
                             'contentDetails': v.get('contentDetails', {})
                         }
@@ -186,10 +223,14 @@ async def main():
 
                         video_stats = stats_map[video_id]['statistics']
                         video_content = stats_map[video_id]['contentDetails']
+                        video_snippet = stats_map[video_id]['snippet']
 
                         view_count = int(video_stats.get('viewCount', 0) or 0)
                         like_count = int(video_stats.get('likeCount', 0) or 0)
                         comment_count = int(video_stats.get('commentCount', 0) or 0)
+
+                        category_id = video_snippet.get('categoryId', '')
+                        category_name = YOUTUBE_VIDEO_CATEGORIES.get(category_id, 'Unknown')
 
                         video_data = {
                             'videoId': video_id,
@@ -198,6 +239,8 @@ async def main():
                             'description': snippet.get('description', ''),
                             'publishedAt': snippet.get('publishedAt', ''),
                             'thumbnailUrl': snippet.get('thumbnails', {}).get('high', {}).get('url', ''),
+                            'categoryId': category_id,
+                            'categoryName': category_name,
                             'viewCount': view_count,
                             'likeCount': like_count,
                             'commentCount': comment_count,
