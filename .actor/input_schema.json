@@ -7,7 +7,8 @@
             "title": "Channel ID or Handle",
             "type": "string",
             "description": "YouTube channel ID (e.g., UC-3IZKseVpdzPSBaWxBxundA) or handle (e.g., @MrBeast)",
-            "editor": "textfield"
+            "editor": "textfield",
+            "default": "@MrBeast"
         },
         "includeChannelStats": {
             "title": "Include Channel Stats",
@@ -26,5 +27,5 @@
             "maximum": 5000
         }
     },
-    "required": ["channelId"]
+    "required": []
 }
