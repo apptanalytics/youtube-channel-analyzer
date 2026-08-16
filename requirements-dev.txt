@@ -1,0 +1,5 @@
+# Install with: pip install -r requirements-dev.txt
+-r requirements.txt
+
+# Test runner (the standalone `python run_tests.py` doesn't need this)
+pytest>=7.0.0

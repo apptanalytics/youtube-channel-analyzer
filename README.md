@@ -99,3 +99,19 @@ A: Uses YouTube's official Data API v3 — the same data available on YouTube St
 
 **Q: What's the engagement rate?**
 A: ((likes + comments) / views) × 100
+
+**Q: A handle like `@MrBeast` sometimes returns HTTP 403. What's up?**
+A: YouTube has progressively restricted the `forHandle` endpoint — some handles now require OAuth instead of an API key. The most reliable workaround is to paste the channel's `UC...` ID (find it via View Page Source → search for `"externalId"`). The actor surfaces this clearly in the run status and dataset when it happens.
+
+---
+
+## Development
+
+```bash
+# Run tests (standalone runner, no pytest needed)
+python run_tests.py
+
+# Or with pytest
+pip install -r requirements-dev.txt
+pytest tests/
+```

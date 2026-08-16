@@ -4,27 +4,27 @@
     "schemaVersion": 1,
     "properties": {
         "channelId": {
-            "title": "Channel ID or Handle",
+            "title": "Channel ID, Handle, or URL",
             "type": "string",
-            "description": "YouTube channel ID (e.g., UC-3IZKseVpdzPSBaWxBxundA) or handle (e.g., @MrBeast)",
+            "description": "YouTube channel ID (UC...), handle (@MrBeast or MrBeast), or a YouTube channel URL. Defaults to @MrBeast for QA convenience.",
             "editor": "textfield",
             "default": "@MrBeast"
         },
         "includeChannelStats": {
             "title": "Include Channel Stats",
             "type": "boolean",
-            "description": "Include overall channel statistics (subscriber count, total views, video count)",
+            "description": "Include overall channel statistics (subscriber count, total views, video count, posting frequency).",
             "editor": "checkbox",
             "default": true
         },
         "maxVideos": {
             "title": "Max Videos",
             "type": "integer",
-            "description": "Maximum number of videos to fetch (most recent first)",
+            "description": "Maximum number of most-recent videos to analyze. Higher values use more YouTube API quota. Capped at 500 to stay under typical daily quotas.",
             "editor": "number",
             "default": 100,
             "minimum": 1,
-            "maximum": 5000
+            "maximum": 500
         }
     },
     "required": []
